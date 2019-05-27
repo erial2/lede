@@ -74,7 +74,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  	} else if (has_acpi_companion(dma_dev)) {
 --- a/drivers/net/bonding/bond_main.c
 +++ b/drivers/net/bonding/bond_main.c
-@@ -1337,7 +1337,8 @@ void bond_lower_state_changed(struct sla
+@@ -1330,7 +1330,8 @@ void bond_lower_state_changed(struct sla
  }
  
  /* enslave device <slave> to bond device <master> */
@@ -84,7 +84,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  {
  	struct bonding *bond = netdev_priv(bond_dev);
  	const struct net_device_ops *slave_ops = slave_dev->netdev_ops;
-@@ -3509,7 +3510,7 @@ static int bond_do_ioctl(struct net_devi
+@@ -3506,7 +3507,7 @@ static int bond_do_ioctl(struct net_devi
  	switch (cmd) {
  	case BOND_ENSLAVE_OLD:
  	case SIOCBONDENSLAVE:
@@ -95,7 +95,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  	case SIOCBONDRELEASE:
 --- a/drivers/net/bonding/bond_options.c
 +++ b/drivers/net/bonding/bond_options.c
-@@ -1389,7 +1389,7 @@ static int bond_option_slaves_set(struct
+@@ -1382,7 +1382,7 @@ static int bond_option_slaves_set(struct
  	switch (command[0]) {
  	case '+':
  		netdev_dbg(bond->dev, "Adding slave %s\n", dev->name);
@@ -106,7 +106,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  	case '-':
 --- a/drivers/net/team/team.c
 +++ b/drivers/net/team/team.c
-@@ -1932,7 +1932,8 @@ static int team_netpoll_setup(struct net
+@@ -1953,7 +1953,8 @@ static int team_netpoll_setup(struct net
  }
  #endif
  
@@ -263,7 +263,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  int bond_set_carrier(struct bonding *bond);
 --- a/net/batman-adv/soft-interface.c
 +++ b/net/batman-adv/soft-interface.c
-@@ -872,7 +872,8 @@ free_bat_counters:
+@@ -876,7 +876,8 @@ free_bat_counters:
   * Return: 0 if successful or error otherwise.
   */
  static int batadv_softif_slave_add(struct net_device *dev,
@@ -358,7 +358,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  }
  
  #ifdef CONFIG_NET_INGRESS
-@@ -6338,7 +6339,15 @@ static int __netdev_upper_dev_link(struc
+@@ -6341,7 +6342,15 @@ static int __netdev_upper_dev_link(struc
  				   struct net_device *upper_dev, bool master,
  				   void *upper_priv, void *upper_info)
  {
@@ -375,7 +375,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  	int ret = 0;
  
  	ASSERT_RTNL();
-@@ -6356,12 +6365,7 @@ static int __netdev_upper_dev_link(struc
+@@ -6359,12 +6368,7 @@ static int __netdev_upper_dev_link(struc
  	if (master && netdev_master_upper_dev_get(dev))
  		return -EBUSY;
  
@@ -389,7 +389,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  					    &changeupper_info.info);
  	ret = notifier_to_errno(ret);
  	if (ret)
-@@ -6373,7 +6377,7 @@ static int __netdev_upper_dev_link(struc
+@@ -6376,7 +6380,7 @@ static int __netdev_upper_dev_link(struc
  		return ret;
  
  	netdev_update_addr_mask(dev);
@@ -398,7 +398,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  					    &changeupper_info.info);
  	ret = notifier_to_errno(ret);
  	if (ret)
-@@ -6437,21 +6441,25 @@ EXPORT_SYMBOL(netdev_master_upper_dev_li
+@@ -6440,21 +6444,25 @@ EXPORT_SYMBOL(netdev_master_upper_dev_li
  void netdev_upper_dev_unlink(struct net_device *dev,
  			     struct net_device *upper_dev)
  {
@@ -429,7 +429,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  				      &changeupper_info.info);
  }
  EXPORT_SYMBOL(netdev_upper_dev_unlink);
-@@ -6467,11 +6475,13 @@ EXPORT_SYMBOL(netdev_upper_dev_unlink);
+@@ -6470,11 +6478,13 @@ EXPORT_SYMBOL(netdev_upper_dev_unlink);
  void netdev_bonding_info_change(struct net_device *dev,
  				struct netdev_bonding_info *bonding_info)
  {
@@ -445,7 +445,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  				      &info.info);
  }
  EXPORT_SYMBOL(netdev_bonding_info_change);
-@@ -6597,11 +6607,13 @@ EXPORT_SYMBOL(dev_get_nest_level);
+@@ -6600,11 +6610,13 @@ EXPORT_SYMBOL(dev_get_nest_level);
  void netdev_lower_state_changed(struct net_device *lower_dev,
  				void *lower_state_info)
  {
@@ -461,7 +461,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  				      &changelowerstate_info.info);
  }
  EXPORT_SYMBOL(netdev_lower_state_changed);
-@@ -6892,11 +6904,14 @@ void __dev_notify_flags(struct net_devic
+@@ -6895,11 +6907,14 @@ void __dev_notify_flags(struct net_devic
  
  	if (dev->flags & IFF_UP &&
  	    (changes & ~(IFF_UP | IFF_PROMISC | IFF_ALLMULTI | IFF_VOLATILE))) {
@@ -522,7 +522,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  		}
 --- a/net/core/skbuff.c
 +++ b/net/core/skbuff.c
-@@ -799,6 +799,32 @@ void napi_consume_skb(struct sk_buff *sk
+@@ -803,6 +803,32 @@ void napi_consume_skb(struct sk_buff *sk
  }
  EXPORT_SYMBOL(napi_consume_skb);
  
@@ -555,7 +555,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  /* Make sure a field is enclosed inside headers_start/headers_end section */
  #define CHECK_SKB_FIELD(field) \
  	BUILD_BUG_ON(offsetof(struct sk_buff, field) <		\
-@@ -1318,7 +1344,7 @@ static void skb_headers_offset_update(st
+@@ -1322,7 +1348,7 @@ static void skb_headers_offset_update(st
  	skb->inner_mac_header += off;
  }
  
@@ -564,7 +564,7 @@ Signed-off-by: Biwen Li <biwen.li@nxp.com>
  {
  	__copy_skb_header(new, old);
  
-@@ -1326,6 +1352,7 @@ static void copy_skb_header(struct sk_bu
+@@ -1330,6 +1356,7 @@ static void copy_skb_header(struct sk_bu
  	skb_shinfo(new)->gso_segs = skb_shinfo(old)->gso_segs;
  	skb_shinfo(new)->gso_type = skb_shinfo(old)->gso_type;
  }
